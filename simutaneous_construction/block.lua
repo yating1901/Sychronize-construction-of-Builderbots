@@ -1,11 +1,17 @@
 function init() 
    if robot.id == 'block0' then
-      robot.directional_leds.set_all_colors('orange')
+      robot.directional_leds.set_all_colors('black')
    elseif robot.id == 'block1' then
-      robot.directional_leds.set_all_colors('green')
+      robot.directional_leds.set_all_colors('orange')
+   elseif robot.id == 'block6' then
+      robot.directional_leds.set_all_colors('orange')
    elseif robot.id == 'block2' then
-      robot.directional_leds.set_all_colors('green')
+      robot.directional_leds.set_all_colors('blue')
    elseif robot.id == 'block3' then
+      robot.directional_leds.set_all_colors('blue')
+   elseif robot.id == 'block4' then
+      robot.directional_leds.set_all_colors('green')
+   elseif robot.id == 'block5' then
       robot.directional_leds.set_all_colors('green')
    else
       robot.directional_leds.set_all_colors('black')
