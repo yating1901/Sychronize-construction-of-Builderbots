@@ -37,7 +37,7 @@
         <builderbot_lift_system implementation="default" />
         <builderbot_nfc implementation="default" show_rays="false" />
       </sensors>
-      <params script="testing/simutaneous_construction_02/basic_controller.lua" rules='testing/simutaneous_construction_02/Builderbot_rules' search_random_range="25"/>
+      <params script="testing/simutaneous_construction/basic_controller.lua" rules='testing/simutaneous_construction/Builderbot_rules'/>
     </lua_controller>
 
     <lua_controller id="block">
@@ -48,7 +48,7 @@
       <sensors>
         <radios implementation="default" show_rays="true"/>
       </sensors>
-      <params script="testing/simutaneous_construction_02/block.lua" key="value"/>
+      <params script="testing/simutaneous_construction/block_controller.lua" key="value"/>
     </lua_controller>
   </controllers>
 
@@ -69,24 +69,21 @@
       <body position="-0.0125,0.5,0" orientation="0,0,0" />
     </box>
 
-     <builderbot id="builderbot2" debug="false">
-      <body position="0.4,0.3,0.0" orientation="180,0,0"/>
+    <builderbot id="builderbot1" debug="false">
+      <body position="0.0,-0.2,0.0" orientation="90,0,0"/>
       <controller config="builderbot"/>
     </builderbot>
-     <block id="block0" debug="false" movable="false">
-      <body position="-0.005,0.2,0.0" orientation="90,0,0"/>
-      <controller config="block"/>
-    </block>
+
    <block id="block1" debug="false" movable="true">
-      <body position="-0.005,0.2,0.055" orientation="0,0,0"/>
+      <body position="0.305,0.2,0.010" orientation="0,0,0"/>
       <controller config="block"/>
     </block>
-     <block id="block2" debug="false" movable="false">
-      <body position="-0.005,0.145,0.0" orientation="90,0,0"/>
+   <block id="block2" debug="false" movable="true">
+      <body position="0.0,-0.105,0.010" orientation="0,0,0"/>
       <controller config="block"/>
     </block>
-    <block id="block3" debug="false" movable="true">
-      <body position="0.305,0.3,0.010" orientation="0,0,0"/>
+   <block id="block3" debug="false" movable="true">
+      <body position="-0.305,0.2,0.010" orientation="0,0,0"/>
       <controller config="block"/>
     </block>
     <distribute>
@@ -133,7 +130,7 @@
      <qt-opengl lua_editor="true">
        <user_functions library="/home/yating/Workspace/argos3-srocs/build/testing/builderbot/libbuilderbot_qtopengl_user_functions"
                       label="builderbot_qtopengl_user_functions" />
-      <frame_grabbing directory="/home/yating/Workspace/BuilderBotLibrary/sc_2" base_name="image_" format="png" />
+      <frame_grabbing directory="/home/yating/Workspace/BuilderBotLibrary/sc_1" base_name="image_" format="png" />
       <camera>
         <placement idx="0" position=" 0,  -2.5,1" look_at="0,0,0.05" lens_focal_length="78" />
         <placement idx="1" position=" 2.5,-2.5,1" look_at="0,0,0.05" lens_focal_length="92" />
