@@ -163,13 +163,13 @@ builderbot_api.subprocess_leds = function()
             local color_number = robot.camera_system.detect_led(led_loc_for_camera)
             if color_number ~= tag.type and color_number ~= 0 then
                tag.type = color_number
-               block.type = tag.type  --need to be comment with the intelligence of block
+              -- block.type = tag.type  --need to be comment with the intelligence of block
                DebugMSG(j,'tag_type:',tag.type)
             end
          end
       end
 ----------
---[[      if block.tags.up ~= nil then  
+     if block.tags.up ~= nil then  --
          if block.tags.up.type == 0 then
              block.type = 0
          end
@@ -189,7 +189,7 @@ builderbot_api.subprocess_leds = function()
          if block.tags.up.type == 3 and block.tags.front.type == 3 then
              block.type = 1
          end          
-      end]]
+      end       --]]
       DebugMSG(i,'block_type:',block.type)
    end
 end
