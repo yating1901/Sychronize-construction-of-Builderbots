@@ -45,6 +45,19 @@ local create_search_block_node = function(rule_node)
                         --api.blocks[1]
                         local random_angle = math.random(-api.parameters.search_random_range, api.parameters.search_random_range)
                         --api.move(-api.parameters.default_speed, api.parameters.default_speed)
+                        local block_number = 0
+                        for i, block in pairs(api.blocks) do
+                           --for j, tag in pairs(block.tags) do
+                           if block.type == 1 then
+                              block_number = block_number + 1
+                           end
+                           --end
+                        end
+                        if block_number >= 2 then
+                           random_angle = -15
+                        --elseif tag_number <= 2 then
+                        --   random_angle = 0.1
+                        end
                         api.move_with_bearing(api.parameters.default_speed, random_angle)
                         return false, true
                      end,
