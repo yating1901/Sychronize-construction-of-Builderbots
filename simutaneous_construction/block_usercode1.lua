@@ -199,6 +199,32 @@ function user_code.collect_messages()
    table.insert(user_code.tx_as_target, robot.childstate)  --internal configuration
 end
 
+--Locate at the branch with a top child, 
+function user_code.locate_branch(branch_data)
+   local top_child_index = 0
+   local Is_top_detected = false
+   if branch_data ~= nil then
+      local start_ptr = #branch_data
+      local child_index
+      for child_index = 1, #branch_data do
+         if bit32.band(branch_data[child_index], bit32.lshift(1, 4)) ~= 0 then
+            Is_top_detected = true
+            top_child_index = child_index
+            break
+         end
+      end
+   end
+   return top_child_index,Is_top_detected
+ end
+
+--check if the structure has one top child
+user_code.structure_being_built = {}
+function user_code.get_structure_being_built()
+   user_code.structure_being_built = {}
+   for index = 1, #user_code.tx_as_target do
+      table.insert(user_code.structure_being_built,user_code.tx_as_target[#user_code.tx_as_target+1-index])
+   end
+end
 -- init method --
 function user_code.init()
    robot.isroot = false
@@ -206,13 +232,13 @@ function user_code.init()
    robot.directional_leds.set_all_colors("black")
    robot.childstate = 0
    robot.branch_data = {} --should be an array
-
+   robot.top_detected = false
    -- define the root block
-   if robot.id == "block0" then
+   if robot.id == "block6" then
       robot.isroot = true
-      robot.radios["west"].parent = true
+      robot.radios["north"].parent = true
       robot.blockstate = "Query"
-      user_code.set_directed_faces("south")
+      user_code.set_directed_faces("north")
       robot.branch_data = user_code.tree
    end
 
@@ -250,12 +276,29 @@ function user_code.step(time)
             end
          end
       else
-         robot.directional_leds.set_all_colors("green")
+         robot.directional_leds.set_all_colors("blue")
+         top_child_index,Is_top_detected = user_code.locate_branch(robot.branch_data)
+         if Is_top_detected == true then
+            if top_child_index > 3 or robot.isroot == true then
+               robot.directional_leds.set_all_colors("green")
+            end
+         end
          user_code.collect_messages()
+
+         --every block has to check if top child has been detected--
+         if #user_code.tx_as_target > 0 then
+            user_code.get_structure_being_built()
+            top_child_index,Is_top_detected = user_code.locate_branch(user_code.structure_being_built)
+            if Is_top_detected == true then
+               robot.directional_leds.set_all_colors("green")
+            end
+         end
+
          user_code.allocate_branch()
          if radio.parent == false then
             radio.initiator_policy = "once"
          end
+         
          --check if the structure is completed--
          length = #robot.branch_data
          if robot.isroot == true then

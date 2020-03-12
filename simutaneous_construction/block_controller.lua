@@ -1,5 +1,5 @@
 -- load the interface
-user_code = require('testing/color_induced_construction_01/block_usercode')
+user_code = require('testing/color_induced_construction_04/block_usercode1')
 
 clock = 0
 
