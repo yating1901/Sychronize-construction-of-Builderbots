@@ -42,27 +42,8 @@ local create_search_block_node = function(rule_node)
                      create_obstacle_avoidance_node(),
                      -- obstacle clear, random walk
                      function()
-                        --api.blocks[1]
                         local random_angle = math.random(-api.parameters.search_random_range, api.parameters.search_random_range)
                         --api.move(-api.parameters.default_speed, api.parameters.default_speed)
-                        local green_number = 0
-                        local blue_number = 0
-                        for i, block in pairs(api.blocks) do
-                           --for j, tag in pairs(block.tags) do
-                           if block.type == 1 then
-                              green_number = green_number + 1
-                           end
-                           if block.type == 4 then
-                              blue_number = blue_number + 1
-                           end
-                           --end
-                        end
-                        if green_number >= 2 then
-                           random_angle = -15
-                        end
-                        if blue_number >= 2 then
-                           random_angle = 17
-                        end
                         api.move_with_bearing(api.parameters.default_speed, random_angle)
                         return false, true
                      end,
